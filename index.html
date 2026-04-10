@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Abinath Mukunthan | Full Stack .NET Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d1117;--bg2:#161b22;--bg3:#21262d;
+  --border:#30363d;--border2:#484f58;
+  --green:#39d353;--green2:#26a641;--green3:#196127;
+  --cyan:#58a6ff;--cyan2:#1f6feb;
+  --yellow:#e3b341;--red:#f85149;--purple:#bc8cff;
+  --text:#e6edf3;--muted:#8b949e;--muted2:#6e7681;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.6;overflow-x:hidden}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(48,54,61,0.25) 1px,transparent 1px),linear-gradient(90deg,rgba(48,54,61,0.25) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:0 2rem;height:52px;background:rgba(13,17,23,0.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-brand{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.nav-brand span{color:var(--green);font-weight:700}
+.nav-brand::before{content:'>';color:var(--green);animation:blink 1.2s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.nav-links{display:flex;gap:0;list-style:none}
+.nav-links a{display:block;padding:0 1rem;height:52px;line-height:52px;color:var(--muted);font-size:12px;text-decoration:none;letter-spacing:0.05em;border-left:1px solid var(--border);transition:color 0.15s,background 0.15s}
+.nav-links a:hover{color:var(--text);background:var(--bg2)}
+.nav-links li:last-child a{border-right:1px solid var(--border)}
+.nav-status{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--green);letter-spacing:0.06em}
+.status-dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.6;transform:scale(0.85)}}
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:52px;position:relative;z-index:1}
+.hero-left{padding:5rem 2.5rem 4rem 3rem;border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:center}
+.hero-right{padding:5rem 3rem 4rem 2.5rem;display:flex;flex-direction:column;justify-content:center}
+.hero-label{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--green);margin-bottom:1.2rem;display:flex;align-items:center;gap:10px;opacity:0;animation:fadeUp 0.7s 0.2s forwards}
+.hero-label::before{content:'//';color:var(--muted2)}
+.hero-name{font-family:'Syne',sans-serif;font-size:clamp(2.4rem,4.5vw,4rem);font-weight:800;line-height:1.05;letter-spacing:-0.02em;margin-bottom:0.7rem;opacity:0;animation:fadeUp 0.7s 0.35s forwards}
+.hero-name .first{color:var(--text)}.hero-name .last{color:var(--green)}
+.hero-title-tag{font-size:13px;color:var(--muted);margin-bottom:2rem;opacity:0;animation:fadeUp 0.7s 0.45s forwards}
+.hero-title-tag::before{content:'< ';color:var(--cyan2)}.hero-title-tag::after{content:' />';color:var(--cyan2)}
+.hero-desc{font-size:13px;color:var(--muted);max-width:480px;line-height:1.85;margin-bottom:2.5rem;opacity:0;animation:fadeUp 0.7s 0.55s forwards}
+.hero-desc strong{color:var(--text);font-weight:400}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:fadeUp 0.7s 0.65s forwards}
+.btn{padding:9px 20px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.06em;text-decoration:none;display:inline-flex;align-items:center;gap:8px;border:1px solid;transition:all 0.15s;cursor:pointer;border-radius:4px}
+.btn-green{background:rgba(57,211,83,0.08);border-color:var(--green2);color:var(--green)}
+.btn-green:hover{background:rgba(57,211,83,0.16);border-color:var(--green)}
+.btn-ghost{background:transparent;border-color:var(--border2);color:var(--muted)}
+.btn-ghost:hover{border-color:var(--text);color:var(--text);background:var(--bg2)}
+.hero-stats{display:flex;gap:2rem;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);opacity:0;animation:fadeUp 0.7s 0.75s forwards}
+.stat-n{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--green);line-height:1}
+.stat-l{font-size:11px;color:var(--muted);margin-top:2px;letter-spacing:0.06em}
+/* terminal */
+.terminal{background:var(--bg2);border:1px solid var(--border);border-radius:8px;overflow:hidden;opacity:0;animation:fadeUp 0.7s 0.4s forwards}
+.tbar{padding:10px 14px;background:var(--bg3);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.td{width:12px;height:12px;border-radius:50%}
+.td.r{background:#f85149}.td.y{background:#e3b341}.td.g{background:#3fb950}
+.ttitle{flex:1;text-align:center;color:var(--muted);font-size:11px;letter-spacing:0.05em}
+.tbody{padding:1.2rem 1.4rem;line-height:2;font-size:12.5px}
+.tl{display:block}
+.tc{color:var(--muted2)}.tk{color:var(--purple)}.tf{color:var(--cyan)}.ts{color:var(--green)}.tbr{color:var(--yellow)}.tp{color:var(--text)}.tnum{color:var(--purple)}.tprompt{color:var(--green)}.tcmd{color:var(--cyan)}.tkey{color:var(--cyan)}.tval{color:var(--green)}
+.ind{padding-left:1.5rem}.ind2{padding-left:3rem}
+.cursor{display:inline-block;width:8px;height:14px;background:var(--green);animation:blink 1s step-end infinite;vertical-align:middle}
+/* SECTIONS */
+main{position:relative;z-index:1}
+section{padding:5rem 3rem}
+section+section{border-top:1px solid var(--border)}
+.sec-head{display:flex;align-items:baseline;gap:1.5rem;margin-bottom:3rem}
+.sec-num{font-size:11px;color:var(--muted2);letter-spacing:0.1em}
+.sec-title{font-family:'Syne',sans-serif;font-size:1.55rem;font-weight:800;letter-spacing:-0.01em}
+.sec-title .a{color:var(--green)}
+.sec-line{flex:1;height:1px;background:var(--border)}
+/* EXP TABS */
+.etabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:2rem;overflow-x:auto}
+.etab{padding:10px 20px;font-size:12px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;letter-spacing:0.04em;transition:color 0.15s,border-color 0.15s}
+.etab.active{color:var(--green);border-bottom-color:var(--green)}
+.etab:hover:not(.active){color:var(--text);border-bottom-color:var(--border2)}
+.epanel{display:none}
+.epanel.active{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.exp-role{font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:700;margin-bottom:4px}
+.exp-co{font-size:12px;color:var(--cyan);margin-bottom:2px}
+.exp-loc{font-size:11px;color:var(--muted);margin-bottom:1.2rem}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;padding:3px 10px;border-radius:3px;margin-bottom:4px;margin-right:6px}
+.badge-y{color:var(--yellow);background:rgba(227,179,65,0.08);border:1px solid rgba(227,179,65,0.25)}
+.badge-g{color:var(--green);background:rgba(57,211,83,0.06);border:1px solid rgba(57,211,83,0.2)}
+.badge-g::before{content:'★';font-size:9px}
+.epoints{list-style:none;margin-top:1.2rem}
+.epoints li{font-size:12px;color:var(--muted);padding:5px 0 5px 1.4rem;position:relative;line-height:1.65;border-bottom:1px solid var(--border)}
+.epoints li:last-child{border-bottom:none}
+.epoints li::before{content:'▸';position:absolute;left:0;color:var(--green);font-size:10px;top:7px}
+/* CODE BLOCK */
+.codewin{background:var(--bg2);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.codewin-bar{padding:8px 14px;background:var(--bg3);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted)}
+.cd{width:8px;height:8px;border-radius:50%;background:var(--border2)}
+.codebody{padding:1rem 1.2rem;font-size:12px;line-height:2}
+.cc{color:var(--muted2)}.ck{color:var(--purple)}.cf{color:var(--cyan)}.cstr{color:var(--green)}.cbr{color:var(--yellow)}
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.sg{background:var(--bg2);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.sgh{padding:10px 16px;background:var(--bg3);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;font-size:12px}
+.sgl{color:var(--cyan);letter-spacing:0.05em}.sgn{color:var(--muted);font-size:11px}
+.sgb{padding:1rem}
+.sr{display:flex;align-items:center;gap:12px;padding:6px 0;border-bottom:1px solid var(--border)}
+.sr:last-child{border-bottom:none}
+.sn{flex:1;font-size:12px;color:var(--text)}
+.sbt{width:100px;height:3px;background:var(--bg3);border-radius:2px;overflow:hidden;flex-shrink:0}
+.sbf{height:100%;background:var(--green);border-radius:2px;width:0;transition:width 1.2s cubic-bezier(0.4,0,0.2,1)}
+.sp{font-size:10px;color:var(--muted2);width:28px;text-align:right}
+.tech-cloud{display:flex;flex-wrap:wrap;gap:8px;margin-top:2rem}
+.tt{padding:5px 12px;border-radius:3px;font-size:11px;letter-spacing:0.05em;border:1px solid;transition:transform 0.15s}
+.tt:hover{transform:translateY(-1px)}
+.tt-b{color:var(--cyan);border-color:rgba(88,166,255,0.3);background:rgba(88,166,255,0.05)}
+.tt-f{color:var(--purple);border-color:rgba(188,140,255,0.3);background:rgba(188,140,255,0.05)}
+.tt-d{color:var(--yellow);border-color:rgba(227,179,65,0.3);background:rgba(227,179,65,0.05)}
+.tt-t{color:var(--green);border-color:rgba(57,211,83,0.3);background:rgba(57,211,83,0.05)}
+/* INT GRID */
+.igrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.icard{background:var(--bg);padding:1.8rem 1.5rem;display:flex;flex-direction:column;gap:10px;transition:background 0.15s;position:relative;overflow:hidden}
+.icard:hover{background:var(--bg2)}
+.icard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--green);transform:scaleX(0);transform-origin:left;transition:transform 0.25s}
+.icard:hover::before{transform:scaleX(1)}
+.iicon{width:38px;height:38px;border-radius:6px;background:var(--bg2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:16px}
+.iname{font-size:13px;font-weight:500;color:var(--text)}.itype{font-size:11px;color:var(--muted)}
+.ibadge{margin-top:auto;align-self:flex-start;font-size:10px;color:var(--green);padding:2px 8px;border:1px solid var(--green3);border-radius:2px;background:rgba(57,211,83,0.04);letter-spacing:0.06em}
+/* AWARDS */
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.acard{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:1.8rem;position:relative;overflow:hidden;transition:border-color 0.2s}
+.acard:hover{border-color:rgba(57,211,83,0.35)}
+.acard::after{content:'★';position:absolute;right:1.5rem;top:1rem;font-size:4rem;color:rgba(57,211,83,0.04);pointer-events:none;line-height:1}
+.ayear{font-size:10px;color:var(--muted2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.8rem}
+.atitle{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:0.4rem;color:var(--green)}
+.aorg{font-size:12px;color:var(--muted);line-height:1.6}
+/* EDUCATION */
+.eblock{background:var(--bg2);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.ehead{padding:1.5rem;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr auto;align-items:start}
+.edeg{font-size:10px;color:var(--cyan);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px}
+.euni{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800}
+.esub{font-size:12px;color:var(--muted);margin-top:3px}
+.eper{font-size:12px;color:var(--yellow)}
+.emeta{display:flex;gap:2rem;padding:1.2rem 1.5rem;font-size:12px;color:var(--muted)}
+.emi{display:flex;align-items:center;gap:6px}
+.emi::before{content:'◆';font-size:8px;color:var(--green)}
+/* CONTACT */
+.clayout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.cbio{font-size:13px;color:var(--muted);line-height:1.9;border-left:3px solid var(--green);padding-left:1.5rem;margin-bottom:2rem}
+.clinks{display:flex;flex-direction:column;gap:1px;background:var(--border)}
+.clink{display:flex;align-items:center;gap:1rem;padding:14px 16px;background:var(--bg2);text-decoration:none;color:var(--text);transition:background 0.15s;font-size:12px}
+.clink:hover{background:var(--bg3)}
+.cli{color:var(--green);width:18px;text-align:center;flex-shrink:0}
+.cll{color:var(--muted);width:70px;flex-shrink:0;font-size:11px}
+.clv{flex:1;color:var(--text)}
+.cla{color:var(--muted2);font-size:11px}
+/* FOOTER */
+footer{padding:1.5rem 3rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--bg2);position:relative;z-index:1}
+footer p{font-size:11px;color:var(--muted2)}
+footer p::before{content:'// ';color:var(--green)}
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:none}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+/* MOBILE */
+@media(max-width:900px){
+  nav{padding:0 1rem}
+  .nav-links li:nth-child(n+3){display:none}
+  .hero{grid-template-columns:1fr}
+  .hero-left{padding:4rem 1.5rem 2rem;border-right:none;border-bottom:1px solid var(--border)}
+  .hero-right{padding:2rem 1.5rem 4rem}
+  section{padding:3rem 1.5rem}
+  .epanel.active,.skills-grid,.agrid,.clayout{grid-template-columns:1fr}
+  .igrid{grid-template-columns:1fr 1fr}
+  footer{padding:1.5rem;flex-direction:column;gap:6px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand"><span>abinath</span>@portfolio:~$</div>
+  <ul class="nav-links">
+    <li><a href="#exp">experience</a></li>
+    <li><a href="#skills">skills</a></li>
+    <li><a href="#integrations">systems</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+  <div class="nav-status"><div class="status-dot"></div>available for work</div>
+</nav>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-label">Full Stack .NET Engineer</div>
+    <h1 class="hero-name"><span class="first">Abinath</span><br/><span class="last">Mukunthan</span></h1>
+    <p class="hero-title-tag">FullStackEngineer</p>
+    <p class="hero-desc">Building <strong>scalable, secure web systems</strong> with .NET for 5+ years. Specialist in enterprise integrations, government APIs, and full-cycle delivery across <strong>banking, ERP, supply chain</strong> and <strong>civic platforms</strong>.</p>
+    <div class="hero-btns">
+      <a class="btn btn-green" href="#exp">$ view ./experience</a>
+      <a class="btn btn-ghost" href="#contact">$ contact --me</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-n">5+</div><div class="stat-l">yrs experience</div></div>
+      <div><div class="stat-n">3</div><div class="stat-l">industries</div></div>
+      <div><div class="stat-n">6</div><div class="stat-l">integrations</div></div>
+      <div><div class="stat-n">2</div><div class="stat-l">awards</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="terminal">
+      <div class="tbar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><div class="ttitle">abinath.json</div></div>
+      <div class="tbody">
+        <span class="tl"><span class="tbr">{</span></span>
+        <span class="tl ind"><span class="tkey">"name"</span>: <span class="tval">"Abinath Mukunthan"</span>,</span>
+        <span class="tl ind"><span class="tkey">"role"</span>: <span class="tval">"Full Stack .NET Engineer"</span>,</span>
+        <span class="tl ind"><span class="tkey">"location"</span>: <span class="tval">"Dubai, UAE"</span>,</span>
+        <span class="tl ind"><span class="tkey">"experience"</span>: <span class="tnum">5</span>,</span>
+        <span class="tl ind"><span class="tkey">"stack"</span>: <span class="tbr">[</span></span>
+        <span class="tl ind2"><span class="tval">"ASP.NET Core"</span>, <span class="tval">"C#"</span>, <span class="tval">"Angular"</span>,</span>
+        <span class="tl ind2"><span class="tval">"SQL Server"</span>, <span class="tval">"Web API"</span>, <span class="tval">"EF Core"</span></span>
+        <span class="tl ind"><span class="tbr">]</span>,</span>
+        <span class="tl ind"><span class="tkey">"domains"</span>: <span class="tbr">[</span><span class="tval">"banking"</span>, <span class="tval">"ERP"</span>, <span class="tval">"gov"</span><span class="tbr">]</span>,</span>
+        <span class="tl ind"><span class="tkey">"awards"</span>: <span class="tnum">2</span>,</span>
+        <span class="tl ind"><span class="tkey">"open_to_work"</span>: <span class="tk">true</span></span>
+        <span class="tl"><span class="tbr">}</span> <span class="cursor"></span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="exp">
+  <div class="sec-head reveal">
+    <span class="sec-num">01.</span>
+    <h2 class="sec-title">work_<span class="a">experience()</span></h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="etabs reveal">
+    <div class="etab active" onclick="switchTab(0)">4sight Technology</div>
+    <div class="etab" onclick="switchTab(1)">Sirius Technology</div>
+    <div class="etab" onclick="switchTab(2)">MCB Bank</div>
+  </div>
+  <div id="panels">
+    <div class="epanel active reveal">
+      <div>
+        <div class="exp-role">Full Stack Software Engineer</div>
+        <div class="exp-co">4sight Technology · Alpha Data Group</div>
+        <div class="exp-loc">📍 Sharjah, United Arab Emirates</div>
+        <span class="badge badge-y">2023 — Present</span>
+        <span class="badge badge-g">Recognition of Excellence</span>
+        <ul class="epoints">
+          <li>End-to-end SDLC for Emirates Driving — UAE's large-scale driving institute platform</li>
+          <li>Built scalable apps using ASP.NET Core, MVC, Web API, Angular, SQL Server, EF Core</li>
+          <li>Integrated UAE PASS, FMS, EAS, Abu Dhabi Police, MS Dynamics 365 &amp; PayTabs</li>
+          <li>Optimised SQL queries &amp; stored procedures for high-volume integration workflows</li>
+          <li>Collaborated with cross-functional teams for continuous system enhancement</li>
+        </ul>
+      </div>
+      <div class="codewin">
+        <div class="codewin-bar"><div class="cd"></div><div class="cd"></div><div class="cd"></div><span style="flex:1;text-align:center">IntegrationService.cs</span></div>
+        <div class="codebody">
+          <span class="tl"><span class="cc">// Government integrations</span></span>
+          <span class="tl"><span class="ck">public class</span> <span class="cf">IntegrationService</span></span>
+          <span class="tl"><span class="cbr">{</span></span>
+          <span class="tl ind"><span class="ck">private readonly</span> IUaePassClient _uaePass;</span>
+          <span class="tl ind"><span class="ck">private readonly</span> IDynamicsClient _d365;</span>
+          <span class="tl ind"><span class="ck">private readonly</span> IPayTabsGateway _pay;</span>
+          <span class="tl">&nbsp;</span>
+          <span class="tl ind"><span class="ck">public async</span> Task&lt;AuthResult&gt;</span>
+          <span class="tl ind">&nbsp;&nbsp;<span class="cf">AuthenticateAsync</span>(string token)</span>
+          <span class="tl ind"><span class="cbr">{</span></span>
+          <span class="tl ind2"><span class="ck">return await</span> _uaePass</span>
+          <span class="tl ind2">&nbsp;&nbsp;.<span class="cf">ValidateTokenAsync</span>(token);</span>
+          <span class="tl ind"><span class="cbr">}</span></span>
+          <span class="tl"><span class="cbr">}</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="epanel reveal">
+      <div>
+        <div class="exp-role">Full Stack Software Engineer</div>
+        <div class="exp-co">Sirius Technology · Abans Group</div>
+        <div class="exp-loc">📍 Colombo, Sri Lanka</div>
+        <span class="badge badge-y">2021 — 2023</span>
+        <span class="badge badge-g">Innovation of the Year</span>
+        <ul class="epoints">
+          <li>Built enterprise ERP &amp; supply chain applications for Abans Group</li>
+          <li>Led development of Service Center Management module — adopted org-wide</li>
+          <li>Built API integrations for flagship retail launch at Sri Lanka's largest mall</li>
+          <li>Delivered scalable solutions supporting rapid business expansion</li>
+        </ul>
+      </div>
+      <div class="codewin">
+        <div class="codewin-bar"><div class="cd"></div><div class="cd"></div><div class="cd"></div><span style="flex:1;text-align:center">ServiceCenter.cs</span></div>
+        <div class="codebody">
+          <span class="tl"><span class="cc">// Service Center API</span></span>
+          <span class="tl"><span class="ck">[ApiController]</span></span>
+          <span class="tl"><span class="ck">[Route("api/[controller]")]</span></span>
+          <span class="tl"><span class="ck">public class</span> <span class="cf">ServiceController</span></span>
+          <span class="tl"><span class="cbr">{</span></span>
+          <span class="tl ind"><span class="ck">[HttpPost]</span></span>
+          <span class="tl ind"><span class="ck">public async</span> Task&lt;IActionResult&gt;</span>
+          <span class="tl ind">&nbsp;&nbsp;<span class="cf">CreateTicket</span>([FromBody] TicketDto dto)</span>
+          <span class="tl ind"><span class="cbr">{</span></span>
+          <span class="tl ind2"><span class="ck">var</span> result = <span class="ck">await</span> _svc.<span class="cf">ProcessAsync</span>(dto);</span>
+          <span class="tl ind2"><span class="ck">return</span> <span class="cf">Ok</span>(result);</span>
+          <span class="tl ind"><span class="cbr">}</span></span>
+          <span class="tl"><span class="cbr">}</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="epanel reveal">
+      <div>
+        <div class="exp-role">Associate Software Engineer</div>
+        <div class="exp-co">MCB Bank</div>
+        <div class="exp-loc">📍 Colombo, Sri Lanka</div>
+        <span class="badge badge-y">2019 — 2021</span>
+        <ul class="epoints">
+          <li>Banking web apps with .NET Framework, ASP.NET MVC &amp; SQL Server</li>
+          <li>eKYC feature enhancements — compliance with banking standards</li>
+          <li>Custom Core Banking System modules for critical business workflows</li>
+          <li>MIS Reporting, Locker Management &amp; Admin Management systems</li>
+          <li>Unit testing with NUnit; source control via Git &amp; SVN</li>
+        </ul>
+      </div>
+      <div class="codewin">
+        <div class="codewin-bar"><div class="cd"></div><div class="cd"></div><div class="cd"></div><span style="flex:1;text-align:center">KycTests.cs</span></div>
+        <div class="codebody">
+          <span class="tl"><span class="cc">// NUnit banking tests</span></span>
+          <span class="tl"><span class="ck">[TestFixture]</span></span>
+          <span class="tl"><span class="ck">public class</span> <span class="cf">KycServiceTests</span></span>
+          <span class="tl"><span class="cbr">{</span></span>
+          <span class="tl ind"><span class="ck">[Test]</span></span>
+          <span class="tl ind"><span class="ck">public void</span> <span class="cf">Validate_NIC_ReturnsTrue</span>()</span>
+          <span class="tl ind"><span class="cbr">{</span></span>
+          <span class="tl ind2"><span class="ck">var</span> result = _svc.<span class="cf">Validate</span>(<span class="cstr">"123456789V"</span>);</span>
+          <span class="tl ind2">Assert.<span class="cf">IsTrue</span>(result);</span>
+          <span class="tl ind"><span class="cbr">}</span></span>
+          <span class="tl"><span class="cbr">}</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="background:var(--bg2)">
+  <div class="sec-head reveal">
+    <span class="sec-num">02.</span>
+    <h2 class="sec-title">tech_<span class="a">stack()</span></h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="skills-grid reveal">
+    <div class="sg">
+      <div class="sgh"><span class="sgl">C#</span><span style="color:var(--muted2)">/</span><span class="sgn">Backend</span></div>
+      <div class="sgb">
+        <div class="sr"><span class="sn">ASP.NET Core</span><div class="sbt"><div class="sbf" data-w="95"></div></div><span class="sp">95%</span></div>
+        <div class="sr"><span class="sn">C#</span><div class="sbt"><div class="sbf" data-w="95"></div></div><span class="sp">95%</span></div>
+        <div class="sr"><span class="sn">Web API / REST</span><div class="sbt"><div class="sbf" data-w="92"></div></div><span class="sp">92%</span></div>
+        <div class="sr"><span class="sn">Entity Framework Core</span><div class="sbt"><div class="sbf" data-w="90"></div></div><span class="sp">90%</span></div>
+        <div class="sr"><span class="sn">ASP.NET MVC</span><div class="sbt"><div class="sbf" data-w="92"></div></div><span class="sp">92%</span></div>
+      </div>
+    </div>
+    <div class="sg">
+      <div class="sgh"><span class="sgl">TS</span><span style="color:var(--muted2)">/</span><span class="sgn">Frontend</span></div>
+      <div class="sgb">
+        <div class="sr"><span class="sn">Angular</span><div class="sbt"><div class="sbf" data-w="85"></div></div><span class="sp">85%</span></div>
+        <div class="sr"><span class="sn">JavaScript</span><div class="sbt"><div class="sbf" data-w="84"></div></div><span class="sp">84%</span></div>
+        <div class="sr"><span class="sn">Razor / MVC Views</span><div class="sbt"><div class="sbf" data-w="88"></div></div><span class="sp">88%</span></div>
+        <div class="sr"><span class="sn">jQuery</span><div class="sbt"><div class="sbf" data-w="82"></div></div><span class="sp">82%</span></div>
+        <div class="sr"><span class="sn">HTML5 / CSS3 / Bootstrap</span><div class="sbt"><div class="sbf" data-w="88"></div></div><span class="sp">88%</span></div>
+      </div>
+    </div>
+    <div class="sg">
+      <div class="sgh"><span class="sgl">SQL</span><span style="color:var(--muted2)">/</span><span class="sgn">Database</span></div>
+      <div class="sgb">
+        <div class="sr"><span class="sn">MS SQL Server</span><div class="sbt"><div class="sbf" data-w="92"></div></div><span class="sp">92%</span></div>
+        <div class="sr"><span class="sn">Stored Procedures</span><div class="sbt"><div class="sbf" data-w="90"></div></div><span class="sp">90%</span></div>
+        <div class="sr"><span class="sn">Query Optimisation</span><div class="sbt"><div class="sbf" data-w="88"></div></div><span class="sp">88%</span></div>
+      </div>
+    </div>
+    <div class="sg">
+      <div class="sgh"><span class="sgl">git</span><span style="color:var(--muted2)">/</span><span class="sgn">Tools & DevOps</span></div>
+      <div class="sgb">
+        <div class="sr"><span class="sn">Azure DevOps</span><div class="sbt"><div class="sbf" data-w="82"></div></div><span class="sp">82%</span></div>
+        <div class="sr"><span class="sn">Git / TFS / SVN</span><div class="sbt"><div class="sbf" data-w="88"></div></div><span class="sp">88%</span></div>
+        <div class="sr"><span class="sn">Agile / Scrum</span><div class="sbt"><div class="sbf" data-w="88"></div></div><span class="sp">88%</span></div>
+        <div class="sr"><span class="sn">SOLID Principles</span><div class="sbt"><div class="sbf" data-w="87"></div></div><span class="sp">87%</span></div>
+        <div class="sr"><span class="sn">NUnit Testing</span><div class="sbt"><div class="sbf" data-w="78"></div></div><span class="sp">78%</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="tech-cloud reveal">
+    <span class="tt tt-b">ASP.NET Core</span><span class="tt tt-b">C#</span><span class="tt tt-b">Web API</span>
+    <span class="tt tt-b">EF Core</span><span class="tt tt-b">MVC</span>
+    <span class="tt tt-f">Angular</span><span class="tt tt-f">TypeScript</span><span class="tt tt-f">jQuery</span><span class="tt tt-f">Bootstrap</span>
+    <span class="tt tt-d">SQL Server</span><span class="tt tt-d">Stored Procs</span>
+    <span class="tt tt-t">Azure DevOps</span><span class="tt tt-t">Git</span><span class="tt tt-t">Agile/Scrum</span>
+    <span class="tt tt-t">SOLID</span><span class="tt tt-t">RESTful APIs</span>
+  </div>
+</section>
+
+<!-- INTEGRATIONS -->
+<section id="integrations">
+  <div class="sec-head reveal">
+    <span class="sec-num">03.</span>
+    <h2 class="sec-title">system_<span class="a">integrations()</span></h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="igrid reveal">
+    <div class="icard"><div class="iicon">🪪</div><div class="iname">UAE PASS</div><div class="itype">National Identity &amp; Auth</div><div class="ibadge">CONNECTED</div></div>
+    <div class="icard"><div class="iicon">🚗</div><div class="iname">Fleet Management System</div><div class="itype">Vehicle Operations API</div><div class="ibadge">CONNECTED</div></div>
+    <div class="icard"><div class="iicon">📋</div><div class="iname">Exam Application System</div><div class="itype">Assessment Platform</div><div class="ibadge">CONNECTED</div></div>
+    <div class="icard"><div class="iicon">🛡️</div><div class="iname">Abu Dhabi Police Service</div><div class="itype">Government REST API</div><div class="ibadge">CONNECTED</div></div>
+    <div class="icard"><div class="iicon">⚙️</div><div class="iname">Microsoft Dynamics 365</div><div class="itype">ERP / CRM Platform</div><div class="ibadge">CONNECTED</div></div>
+    <div class="icard"><div class="iicon">💳</div><div class="iname">PayTabs Gateway</div><div class="itype">Payment Processing</div><div class="ibadge">CONNECTED</div></div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section style="background:var(--bg2)">
+  <div class="sec-head reveal">
+    <span class="sec-num">04.</span>
+    <h2 class="sec-title">recognition<span class="a">.awards</span></h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="agrid reveal">
+    <div class="acard">
+      <div class="ayear">4sight Technology · 2023–Present · Sharjah, UAE</div>
+      <div class="atitle">★ Recognition of Excellence</div>
+      <div class="aorg">Awarded for the successful delivery of a critical project milestone on the Emirates Driving institute platform — a large-scale government-integrated system.</div>
+    </div>
+    <div class="acard">
+      <div class="ayear">Sirius Technology · 2021–2023 · Colombo, Sri Lanka</div>
+      <div class="atitle">★ Innovation of the Year</div>
+      <div class="aorg">Team award for outstanding contribution to the Service Center Management project at Abans Group — a system adopted across the entire organisation.</div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section>
+  <div class="sec-head reveal">
+    <span class="sec-num">05.</span>
+    <h2 class="sec-title">education<span class="a">.degree</span></h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="eblock reveal">
+    <div class="ehead">
+      <div>
+        <div class="edeg">Bachelor of Engineering · Software Engineering</div>
+        <div class="euni">University of Staffordshire</div>
+        <div class="esub">APIIT Sri Lanka · UK university affiliation</div>
+      </div>
+      <div class="eper">2015 — 2018</div>
+    </div>
+    <div class="emeta">
+      <div class="emi">Software Engineering</div>
+      <div class="emi">UK Accredited</div>
+      <div class="emi">3 Years</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background:var(--bg2)">
+  <div class="sec-head reveal">
+    <span class="sec-num">06.</span>
+    <h2 class="sec-title">contact<span class="a"> --reach-out</span></h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="clayout">
+    <div class="reveal">
+      <p class="cbio">Open to new roles, contracts, and technical collaborations in the UAE and remotely. Let's connect and build something meaningful together.</p>
+      <div class="terminal">
+        <div class="tbar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><div class="ttitle">bash</div></div>
+        <div class="tbody" style="font-size:12px">
+          <span class="tl"><span class="tprompt">abinath@portfolio:~$</span> <span class="tcmd">cat</span> contact.txt</span>
+          <span class="tl" style="color:var(--muted)">Loading contact info...</span>
+          <span class="tl">&nbsp;</span>
+          <span class="tl"><span class="tkey">email</span>    → <span class="tval">abinathmukunthan@gmail.com</span></span>
+          <span class="tl"><span class="tkey">phone</span>    → <span class="tval">+971 50 890 5461</span></span>
+          <span class="tl"><span class="tkey">linkedin</span> → <span class="tval">abinath-mukunthan</span></span>
+          <span class="tl"><span class="tkey">location</span> → <span class="tval">Dubai, UAE</span></span>
+          <span class="tl">&nbsp;</span>
+          <span class="tl"><span class="tprompt">abinath@portfolio:~$</span> <span class="cursor"></span></span>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="clinks">
+        <a class="clink" href="mailto:abinathmukunthan@gmail.com"><span class="cli">✉</span><span class="cll">email</span><span class="clv">abinathmukunthan@gmail.com</span><span class="cla">↗</span></a>
+        <a class="clink" href="tel:+971508905461"><span class="cli">☎</span><span class="cll">phone</span><span class="clv">+971 50 890 5461</span><span class="cla">↗</span></a>
+        <a class="clink" href="https://linkedin.com/in/abinath-mukunthan-5aa499117" target="_blank"><span class="cli">in</span><span class="cll">linkedin</span><span class="clv">abinath-mukunthan-5aa499117</span><span class="cla">↗</span></a>
+        <a class="clink" href="#"><span class="cli">📍</span><span class="cll">location</span><span class="clv">Dubai, United Arab Emirates</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>Abinath Mukunthan · Full Stack .NET Engineer · Dubai, UAE</p>
+  <p>built with passion &amp; a lot of C#</p>
+</footer>
+
+<script>
+function switchTab(idx){
+  document.querySelectorAll('.etab').forEach((t,i)=>t.classList.toggle('active',i===idx));
+  document.querySelectorAll('.epanel').forEach((p,i)=>p.classList.toggle('active',i===idx));
+}
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*60);io.unobserve(e.target);}});
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const bo=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.sbf').forEach(b=>{b.style.width=b.dataset.w+'%'});bo.unobserve(e.target);}});
+},{threshold:0.2});
+document.querySelectorAll('.skills-grid').forEach(el=>bo.observe(el));
+</script>
+</body>
+</html>
