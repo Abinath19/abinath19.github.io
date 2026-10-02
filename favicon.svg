@@ -1,22 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#1c232b"/><stop offset="1" stop-color="#0e1217"/>
-    </linearGradient>
-    <radialGradient id="glow" cx="0.15" cy="0.1" r="0.75">
-      <stop offset="0" stop-color="#3ddc5c" stop-opacity="0.55"/>
-      <stop offset="0.6" stop-color="#3ddc5c" stop-opacity="0.08"/>
-      <stop offset="1" stop-color="#3ddc5c" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#4ae35f"/><stop offset="0.55" stop-color="#2f6b3d"/><stop offset="1" stop-color="#3b4350"/>
-    </linearGradient>
-  </defs>
-  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#bg)"/>
-  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#glow)"/>
-  <rect x="2" y="2" width="60" height="60" rx="14" fill="none" stroke="url(#ring)" stroke-width="3"/>
-  <g transform="translate(6.6 0) skewX(-12)" fill="#f3f4f6" stroke="#f3f4f6" stroke-width="1" stroke-linejoin="round">
-    <path d="M8 46 L18 18 L25 18 L35 35 L44 18 L54 18 L54 46 L48 46 L48 31 L39 46 L32 46 L21.5 26.5 L14 46 Z"/>
-    <path d="M12.5 41.5 Q20 33 30 34 L31.2 37 Q21 36 12.5 41.5 Z"/>
-  </g>
+  <rect width="64" height="64" rx="14" fill="#0d1117"/>
+  <rect x="1.5" y="1.5" width="61" height="61" rx="12.5" fill="none" stroke="#30363d" stroke-width="3"/>
+  <path d="M15 20 L29 32 L15 44" fill="none" stroke="#3ddc5c" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="33" y="40" width="17" height="7" rx="3.5" fill="#e6edf3"/>
 </svg>
